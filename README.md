@@ -3,5 +3,7 @@
 Two-way sync between Google Calendar and a Thymer collection. Plugin source and
 documentation will land here when the first release is ready.
 
-`docs/oauth/` is the return page for the Google sign-in: it forwards Google's
-answer back into Thymer through the `thymer://` deep link. It holds no secrets.
+The site under `docs/` is served at https://calendar.anlet.se/.
+`docs/oauth/` and `docs/zoom/` are the return pages for the Google and Zoom
+sign-ins: they forward the answer back into Thymer through the `thymer://` deep
+link. They hold no secrets.
