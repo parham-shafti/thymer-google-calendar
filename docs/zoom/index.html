@@ -34,7 +34,7 @@
   }
   var st = decodeState(state);
   if (error) {
-    h.textContent = 'Google sign-in was not completed';
+    h.textContent = 'Zoom sign-in was not completed';
     e.textContent = error; e.hidden = false;
   }
   if (!st) {
@@ -45,7 +45,7 @@
   // Web client: hand the code back to the tab that opened us.
   if (window.opener && !window.opener.closed) {
     try {
-      window.opener.postMessage({ type: 'thymer-gcal-oauth', code: code, state: state, error: error }, '*');
+      window.opener.postMessage({ type: 'thymer-gcal-zoom', code: code, state: state, error: error }, '*');
       h.textContent = 'Done. You can close this window.';
       setTimeout(function () { window.close(); }, 800);
       return;
@@ -53,7 +53,7 @@
   }
   // Desktop app: go through Thymer's own thymer:// deep link.
   var url = 'thymer://' + st.h + '/plugin-action?workspaceGuid=' + encodeURIComponent(st.w || 'gcal')
-    + '&action=gcal-oauth&state=' + encodeURIComponent(state)
+    + '&action=gcal-zoom&state=' + encodeURIComponent(state)
     + (code ? '&code=' + encodeURIComponent(code) : '')
     + (error ? '&error=' + encodeURIComponent(error) : '');
   document.getElementById('again').href = url;
