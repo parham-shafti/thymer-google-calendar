@@ -7,7 +7,7 @@
 </head>
 <body><div class="box">
 <h1>Privacy Policy</h1>
-<p>Thymer Google Calendar ("the plugin") is a plugin for the Thymer note-taking app that keeps your Google Calendar and your Thymer workspace in two-way sync. It runs entirely inside your own Thymer application. It is developed by Parham Shafti. Last updated: 3 October 2026.</p>
+<p>Thymer Google Calendar ("the plugin") is a plugin for the Thymer note-taking app that keeps your Google Calendar and your Thymer workspace in two-way sync. It runs inside your own Thymer application. It is developed by Parham Shafti. Last updated: 17 October 2026.</p>
 
 <h2>1. What Google user data the plugin accesses</h2>
 <p>Only after you sign in with Google and grant consent, the plugin accesses the following data through the Google Calendar API, using two scopes:</p>
@@ -29,17 +29,18 @@
 <h2>3. With whom Google user data is shared, transferred or disclosed</h2>
 <ul>
 <li>Google user data is stored only in <b>your own Thymer workspace</b>, through Thymer's own storage and sync, so it is visible only to you and to people you have chosen to share that workspace with in Thymer.</li>
-<li>The developer of the plugin <b>does not receive, store or have access to</b> any of your Google user data. The plugin has no servers of its own.</li>
-<li>Google user data is <b>not shared, transferred or disclosed to any third party</b>, except to Google itself when the plugin writes your changes back to Google Calendar.</li>
+<li>The developer of the plugin <b>does not receive, store or have access to</b> any of your Google user data. The plugin's only server is the sign-in relay described below, and calendar data never passes through it.</li>
+<li><b>Sign-in relay:</b> when you connect an account, and when the plugin renews your sign-in (about once an hour while Thymer is open), its token request goes through a small relay the developer runs on Cloudflare Workers (<code>thymer-calendar.anlet-studies.workers.dev</code>). The relay adds the plugin's Google client credential, passes the request to Google and passes Google's answer straight back to your device. The request carries Google's one-time sign-in code or your refresh token, and the answer carries a new access token. The relay does not store, log or use any of them. Cloudflare acts only as the hosting provider and keeps standard request metrics such as counts and errors, never their content.</li>
+<li>Google user data is <b>not shared, transferred or disclosed to any third party</b>, except to Google itself when the plugin writes your changes back to Google Calendar, and the sign-in requests that pass through the relay as described above.</li>
 <li>Optional place suggestions: when you type in an event's Location field, the text you type is sent to <a href="https://www.geoapify.com/privacy-policy/">Geoapify</a>, or to OpenStreetMap's Photon search (<a href="https://photon.komoot.io">photon.komoot.io</a>) when Geoapify is unavailable, to look up matching places. Only the text you type is sent; no data received from Google is sent with it. You can turn place suggestions off in the plugin's settings.</li>
 </ul>
 <p>The plugin's use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
 
 <h2>4. How Google user data is protected</h2>
 <ul>
-<li>All communication with Google uses encrypted HTTPS (TLS) connections directly between your device and Google.</li>
+<li>All communication uses encrypted HTTPS (TLS). Calendar data travels directly between your device and Google; sign-in requests pass through the relay described above, also over HTTPS.</li>
 <li>Sign-in uses Google's OAuth 2.0 with PKCE. Your Google password is never seen by the plugin.</li>
-<li>The access and refresh tokens are stored only on your device, in the Thymer application's local storage, separately for each Thymer workspace. They are never sent anywhere except to Google.</li>
+<li>The access and refresh tokens are stored only on your device, in the Thymer application's local storage, separately for each Thymer workspace. They are never sent anywhere except to Google; the refresh token reaches Google through the sign-in relay, which does not store it.</li>
 <li>The sign-in return pages on this website (<code>/oauth/</code>) only pass Google's one-time sign-in code back into your Thymer application. They do not store, log or forward any data.</li>
 <li>The plugin requests only the two narrowest scopes it needs and cannot delete events or change calendar settings.</li>
 </ul>
