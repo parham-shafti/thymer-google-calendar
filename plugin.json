@@ -1,6 +1,6 @@
 {
   "ver": 1,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "Google Calendar",
   "icon": "ti-calendar-event",
   "description": "Two-way sync between Google Calendar and a Thymer collection, with attendees linked to your people collection.",

@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.1, 2026-11-05
+
+- An event page you deleted in Thymer and brought back with Undo was treated as deleted: it stopped following Google, and the event could come back as a second page. Now a restored page syncs like any other.
+
 ## v1.0.0, 2026-10-19
 
 First release.

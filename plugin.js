@@ -1899,7 +1899,8 @@ class Plugin extends AppPlugin {
 	}
 
 	recGuid(r) { try { return r._getRow().guid; } catch (e) { return null; } }
-	isTrashed(r) { try { const row = r._getRow(); return !!(row.dlt || row.trashed); } catch (e) { return false; } }
+	// dlt is a bit field: 2|4 deleted, 8 trashed, 1 resurrected (live), so only 14 means gone
+	isTrashed(r) { try { const row = r._getRow(); return !!((row.dlt & 14) || row.trashed); } catch (e) { return false; } }
 	readText(rec, label) {
 		try { const p = rec.prop(label); if (!p) return ''; const v = p.text(); return v == null ? '' : String(v); } catch (e) { return ''; }
 	}
